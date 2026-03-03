@@ -103,7 +103,10 @@ test("DELETE removes an application", async () => {
     .post("/api/applications")
     .send({ company: "TEST_Ericsson", role: "Cloud Intern" });
 
+  console.log("CREATED BODY:", created.status, JSON.stringify(created.body));
+
   const id = created.body.id;
+  console.log("DELETING ID:", id);
 
   const del = await request(app).delete(`/api/applications/${id}`);
   expect(del.status).toBe(200);
