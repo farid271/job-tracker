@@ -99,6 +99,8 @@ jobs:
 
       - name: Run Playwright tests
         run: cd frontend && npx playwright test
+        env: 
+          VITE_API_URL: http://localhost:3001
 
   build:
     name: Build Docker Images

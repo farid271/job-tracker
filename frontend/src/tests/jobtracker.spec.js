@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 
+const BACKEND = process.env.VITE_API_URL || "http://localhost:3001";
+
 test.beforeEach(async ({ page, request }) => {
   let attempts = 0;
   while (attempts < 3) {

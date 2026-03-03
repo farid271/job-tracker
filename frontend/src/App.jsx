@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./index.css";
 
-const API = "https://job-tracker-backend-702k.onrender.com/api/applications";
+const API = `${import.meta.env.VITE_API_URL || "http://localhost:3001"}/api/applications`;
 const STATUSES = ["Applied", "Interview", "Offer", "Rejected"];
 
 function App() {
