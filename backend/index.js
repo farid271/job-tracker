@@ -2,11 +2,27 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import applicationsRouter from "./routes/applications.js";
+import pkg from "pg";
+
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const { Pool } = pkg;
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+pool.query(`
+  CREATE TABLE IF NOT EXISTS applications (
+    id SERIAL PRIMARY KEY,
+    company VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    status VARCHAR(50) DEFAULT 'Applied',
+    date_applied DATE,
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT NOW()
+  )
+`).catch(console.error);
 
 app.use(cors({
   origin: "http://localhost:5173",

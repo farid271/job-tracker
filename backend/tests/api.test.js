@@ -10,13 +10,14 @@ const pool = new Pool({
 
 //clean
 beforeAll(async () => {
+  await pool.query(`DROP TABLE IF EXISTS applications`);
   await pool.query(`
-    CREATE TABLE IF NOT EXISTS applications (
+    CREATE TABLE applications (
       id SERIAL PRIMARY KEY,
       company VARCHAR(255) NOT NULL,
       role VARCHAR(255) NOT NULL,
       status VARCHAR(50) DEFAULT 'Applied',
-      date_applied DATE DEFAULT CURRENT_DATE,
+      date_applied DATE,
       notes TEXT,
       created_at TIMESTAMP DEFAULT NOW()
     )
