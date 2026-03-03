@@ -56,6 +56,15 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
+router.delete("/all", async (req, res) => {
+  try {
+    await pool.query("DELETE FROM applications");
+    res.json({ message: "All cleared" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 // delete for tests
 router.delete("/", async (req, res) => {

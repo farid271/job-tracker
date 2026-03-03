@@ -1,9 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page, request }) => {
-  await request.delete("http://localhost:3001/api/applications", {
-    headers: { "node_env": "test" }
-  });
+  await request.delete("http://localhost:3001/api/applications/all");
   await page.goto("http://localhost:5173");
   await page.waitForLoadState("networkidle");
 });
