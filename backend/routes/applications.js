@@ -56,16 +56,6 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-//deleting
-router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  try {
-    await pool.query("DELETE FROM applications WHERE id = $1", [id]);
-    res.json({ message: "Deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 // delete for tests
 router.delete("/", async (req, res) => {
