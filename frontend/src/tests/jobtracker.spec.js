@@ -1,9 +1,18 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page, request }) => {
-  await request.delete("http://localhost:3001/api/applications/all");
+  let attempts = 0;
+  while (attempts < 3) {
+    await request.delete("http://localhost:3001/api/applications/all");
+    const check = await request.get("http://localhost:3001/api/applications");
+    const data = await check.json();
+    if (data.length === 0) break;
+    attempts++;
+    await new Promise(r => setTimeout(r, 500));
+  }
   await page.goto("http://localhost:5173");
   await page.waitForLoadState("networkidle");
+  await expect(page.getByTestId("stat-total")).toContainText("0", { timeout: 10000 });
 });
 
 async function addApplication(page, company, role, status = null) {
