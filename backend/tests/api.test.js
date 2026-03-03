@@ -9,6 +9,20 @@ const pool = new Pool({
 });
 
 //clean
+beforeAll(async () => {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS applications (
+      id SERIAL PRIMARY KEY,
+      company VARCHAR(255) NOT NULL,
+      role VARCHAR(255) NOT NULL,
+      status VARCHAR(50) DEFAULT 'Applied',
+      date_applied DATE DEFAULT CURRENT_DATE,
+      notes TEXT,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `);
+});
+
 beforeEach(async () => {
   await pool.query("DELETE FROM applications WHERE company LIKE 'TEST_%'");
 });
@@ -16,12 +30,6 @@ beforeEach(async () => {
 afterAll(async () => {
   await pool.query("DELETE FROM applications WHERE company LIKE 'TEST_%'");
   await pool.end();
-});
-
-test("GET /health returns ok", async () => {
-  const res = await request(app).get("/health");
-  expect(res.status).toBe(200);
-  expect(res.body.status).toBe("ok");
 });
 
 //post

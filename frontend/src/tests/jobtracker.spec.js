@@ -14,11 +14,10 @@ async function addApplication(page, company, role, status = null) {
   await page.getByTestId("role-input").fill(role);
   if (status) await page.getByTestId("status-select").selectOption(status);
   await page.getByTestId("add-btn").click();
-  // Wait until the total stat actually increments
   await expect(page.getByTestId("stat-total")).not.toContainText(before, { timeout: 10000 });
 }
 
-// ─── UI Load ─────────────────────────────────────────────────────
+//ui
 
 test("page loads with correct title", async ({ page }) => {
   await expect(page.locator("h1")).toContainText("Job Tracker");
@@ -33,7 +32,7 @@ test("stats start at zero", async ({ page }) => {
   await expect(page.getByTestId("stat-applied")).toContainText("0");
 });
 
-// ─── Adding Applications ─────────────────────────────────────────
+//add
 
 test("can add a new application", async ({ page }) => {
   // Capture all console messages from the browser
@@ -60,7 +59,7 @@ test("clears form after adding application", async ({ page }) => {
   await expect(page.getByTestId("role-input")).toHaveValue("");
 });
 
-// ─── Validation ───────────────────────────────────────────────────
+//validating
 
 test("shows error when company is empty", async ({ page }) => {
   await page.getByTestId("role-input").fill("Developer Intern");
@@ -74,7 +73,7 @@ test("shows error when role is empty", async ({ page }) => {
   await expect(page.getByTestId("error-msg")).toContainText("Company and role are required.");
 });
 
-// ─── Deleting ─────────────────────────────────────────────────────
+//delete
 
 test("can delete an application", async ({ page }) => {
   await addApplication(page, "Lumentum", "Firmware Intern");
@@ -85,7 +84,7 @@ test("can delete an application", async ({ page }) => {
   await expect(page.getByTestId("stat-total")).toContainText("0");
 });
 
-// ─── Status & Filtering ───────────────────────────────────────────
+//status
 
 test("can update application status", async ({ page }) => {
   await addApplication(page, "Ericsson", "Cloud Intern");
@@ -104,7 +103,7 @@ test("filter by status works", async ({ page }) => {
   await expect(page.getByTestId("application-card").first()).toContainText("Ciena");
 });
 
-// ─── Theme Toggle ─────────────────────────────────────────────────
+//switch
 
 test("theme toggle switches between light and dark mode", async ({ page }) => {
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", "dark");
