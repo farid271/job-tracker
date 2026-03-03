@@ -2,15 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import applicationsRouter from "./routes/applications.js";
-import pkg from "pg";
-
+import pool from "./db.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const { Pool } = pkg;
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
 
 if (process.env.NODE_ENV !== "test") {
   pool.query(`

@@ -1,19 +1,8 @@
 import express from "express";
-import pkg from "pg";
-const { Pool } = pkg;
-import dotenv from "dotenv";
+import pool from "../db.js";
 
-dotenv.config();
 
 const router = express.Router();
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('render.com') 
-    ? { rejectUnauthorized: false } 
-    : false
-});
-
 
 
 //get
