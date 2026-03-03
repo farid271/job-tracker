@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #f5f5f0;
+  --surface: #ffffff;
+  --surface-2: #f0f0eb;
+  --border: #e0e0d8;
+  --text: #1a1a2e;
+  --text-muted: #7a7a8a;
+  --text-dim: #b0b0c0;
+  --accent: #c9a227;
+  --accent-dim: rgba(201, 162, 39, 0.1);
+  --applied: #1971c2;
+  --applied-bg: rgba(25, 113, 194, 0.08);
+  --interview: #e67700;
+  --interview-bg: rgba(230, 119, 0, 0.08);
+  --offer: #2f9e44;
+  --offer-bg: rgba(47, 158, 68, 0.08);
+  --rejected: #c92a2a;
+  --rejected-bg: rgba(201, 42, 42, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f13;
+  --surface: #1a1a24;
+  --surface-2: #22222e;
+  --border: #2e2e3e;
+  --text: #f0f0f5;
+  --text-muted: #6b6b80;
+  --text-dim: #3a3a50;
+  --accent: #e8c547;
+  --accent-dim: rgba(232, 197, 71, 0.12);
+  --applied: #4da8da;
+  --applied-bg: rgba(77, 168, 218, 0.1);
+  --interview: #e8c547;
+  --interview-bg: rgba(232, 197, 71, 0.1);
+  --offer: #4dda8a;
+  --offer-bg: rgba(77, 218, 138, 0.1);
+  --rejected: #da4d6a;
+  --rejected-bg: rgba(218, 77, 106, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 48px 24px;
+}
+
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.header {
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+}
+
+.header-top {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.5px;
+}
+
+.header-tag {
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+/* ── Stats ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  margin-bottom: 40px;
+  background: var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.stat-card {
+  background: var(--surface);
+  padding: 20px 16px;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.stat-card:hover { background: var(--surface-2); }
+
+.stat-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.stat-number.applied { color: var(--applied); }
+.stat-number.interview { color: var(--interview); }
+.stat-number.offer { color: var(--offer); }
+.stat-number.rejected { color: var(--rejected); }
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+
+/* ── Form ── */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 32px;
+}
+
+.form-card h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.form-card input,
+.form-card select,
+.form-card textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.form-card input::placeholder,
+.form-card textarea::placeholder { color: var(--text-dim); }
+
+.form-card input:focus,
+.form-card select:focus,
+.form-card textarea:focus {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.form-card select option { background: var(--surface); }
+
+.form-card textarea {
+  resize: vertical;
+  min-height: 72px;
+  margin-bottom: 10px;
+}
+
+.form-card button {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: #0f0f13;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.form-card button:hover { opacity: 0.88; }
+.form-card button:active { transform: scale(0.99); }
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #0f0f13;
+  border-color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── Application Cards ── */
+.applications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.application-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.15s, border-color 0.15s;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.application-card:hover {
+  background: var(--surface-2);
+  border-color: var(--text-dim);
+}
+
+.app-info { flex: 1; min-width: 0; }
+
+.app-company {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-role {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.app-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.app-date {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.app-notes {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Status pill select */
+.status-select {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid;
+  transition: opacity 0.2s;
+  font-weight: 500;
+}
+
+.status-select.Applied {
+  background: var(--applied-bg);
+  border-color: var(--applied);
+  color: var(--applied);
+}
+
+.status-select.Interview {
+  background: var(--interview-bg);
+  border-color: var(--interview);
+  color: var(--interview);
+}
+
+.status-select.Offer {
+  background: var(--offer-bg);
+  border-color: var(--offer);
+  color: var(--offer);
+}
+
+.status-select.Rejected {
+  background: var(--rejected-bg);
+  border-color: var(--rejected);
+  color: var(--rejected);
+}
+
+.status-select option { background: var(--surface); color: var(--text); }
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+  padding: 4px;
+}
+
+.delete-btn:hover { color: var(--rejected); }
+
+/* ── Empty State ── */
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 60px 40px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* ── Error ── */
+.error-msg {
+  color: var(--rejected);
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: var(--rejected-bg);
+  border-radius: 6px;
+  border: 1px solid var(--rejected);
+}
+
+/* ── Theme Toggle ── */
+.theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.5px;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
