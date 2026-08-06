@@ -25,7 +25,10 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://job-tracker-delta-ten.vercel.app"
+  ],
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "node_env"]
 }));
