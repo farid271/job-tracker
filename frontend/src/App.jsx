@@ -74,7 +74,6 @@ function App() {
       <div className="header">
         <div className="header-top">
           <h1>Job Tracker</h1>
-          <span className="header-tag">Ottawa 2026</span>
           <button
             className="theme-toggle"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
